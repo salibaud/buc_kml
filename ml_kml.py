@@ -31,6 +31,8 @@ TALLER['FECHA_PEDIDO'] = pd.to_datetime(TALLER['FECHA_PEDIDO'], format='%d/%m/%Y
 
 # In[3]:
 
+print("paso1")
+
 
 query = text("SELECT * FROM ext_patente_kml;")
 df= pd.read_sql(query, DS)
@@ -64,7 +66,7 @@ df3 = df3[["PATENTE","MARCA","MODELO","KML","FECHA_PEDIDO"]]
 
 # In[8]:
 
-
+print("paso2")
 df_final=df3.append(TALLER)
 
 
@@ -112,7 +114,7 @@ ULTIMA_VISITA = pd.read_sql(query, engine)
 ULTIMA_VISITA['fecha_format'] = pd.to_datetime(ULTIMA_VISITA['FECHA_PEDIDO'], format='%d/%m/%Y')
 
 ULTIMA_VISITA = ULTIMA_VISITA.groupby("PATENTE").max()
-
+print("paso3")
 
 # In[19]:
 
@@ -158,8 +160,7 @@ df_matric = pd.read_sql(query, DS)
 
 
 # In[28]:
-
-
+print("paso4")
 df_matric=df_matric.groupby("PATENTE").min().reset_index()
 
 
@@ -208,7 +209,7 @@ for i in range(len(df_final_1)):
 
 
 # In[34]:
-
+print("paso5")
 
 df_final_1["Antiguedad_meses"] = df_final_1["Antiguedad"]/30
 contador = df_final_1.groupby("PATENTE").count().reset_index()[["PATENTE","MARCA"]]
@@ -267,7 +268,7 @@ base_4=base_3.merge(resultados_modelo,how='left',on='PATENTE')
 
 
 # In[45]:
-
+print("paso6")
 
 #agrego kilometraje promedio
 
@@ -339,7 +340,7 @@ base_9 = base_7[base_7["nivel_llegada"].isin(["97","98","99"])]
 base_8["caso"]='Por tiempo'
 base_9 = base_9[~base_9["PATENTE"].isin(base_8["PATENTE"])]
 
-
+print("paso7")
 # In[52]:
 
 
@@ -418,7 +419,7 @@ base_12["rut_final"] =np.where(base_12["RUT_x"].isna(),base_12["RUT_y"],base_12[
 base_13 = base_12[["rut_final","PATENTE",'MARCA', 'MODELO', 'KML_ULT_MANT', 'FECHA_ULT_MANT','INSCRIPCION', 'KML_ESTIMADO',
                   'KML_MENSUAL', 'Antiguedad_1','FECHA_PROX_VISITA', 'caso']]
 
-
+print("paso8")
 # In[65]:
 
 
